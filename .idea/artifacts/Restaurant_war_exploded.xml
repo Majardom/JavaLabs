@@ -1,0 +1,39 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Restaurant:war exploded">
+    <output-path>$PROJECT_DIR$/target/Restaurant</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>Restaurant</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Restaurant" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-server:9.4.20.v20190813" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-http:9.4.20.v20190813" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-util:9.4.20.v20190813" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-io:9.4.20.v20190813" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.6" />
+          <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.4" />
+          <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.5.4" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.12.0" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.12.0" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.13" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.5" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.7.5" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/Restaurant/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="Restaurant/web/Web" />
+    </root>
+  </artifact>
+</component>
