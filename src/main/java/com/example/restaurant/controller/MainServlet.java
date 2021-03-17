@@ -1,5 +1,6 @@
 package com.example.restaurant.controller;
 
+import com.example.restaurant.controller.EJB.CommandService;
 import com.example.restaurant.controller.command.AdminCheckOrderCommand;
 import com.example.restaurant.controller.command.AdminCommand;
 import com.example.restaurant.controller.command.AdminConfirmCommand;
@@ -7,6 +8,7 @@ import com.example.restaurant.controller.command.Command;
 import com.example.restaurant.controller.command.DishAddCommand;
 import com.example.restaurant.controller.command.DishCommand;
 import com.example.restaurant.controller.command.DishRemoveCommand;
+import com.example.restaurant.controller.command.HibernateTestCommand;
 import com.example.restaurant.controller.command.MenuCommand;
 import com.example.restaurant.controller.command.LoginCommand;
 import com.example.restaurant.controller.command.LogoutCommand;
@@ -28,6 +30,7 @@ import com.example.restaurant.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -48,6 +51,9 @@ public class MainServlet extends HttpServlet {
     private final DishService dishService = new DishService();
     private final OrderService orderService = new OrderService();
     private final ProductService productService = new ProductService();
+
+    @EJB
+    CommandService commandService;
 
     public void init(ServletConfig servletConfig) {
 
@@ -71,28 +77,14 @@ public class MainServlet extends HttpServlet {
         commands.put("/addMoney", new BalancePageCommand(userService));
         commands.put("/addBalance", new BalanceReplenishCommand(userService));
         commands.put("/adminOrder", new AdminCommand(orderService, productService));
+        commands.put("/hibernate", new HibernateTestCommand());
 
+        commandService.setCommands(commands);
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String path = request.getRequestURI().replaceFirst(request.getContextPath() + "/app", "");
-        Command command = commands.getOrDefault(path,
-                (r) -> "/WEB-INF/view/menu.jsp");
-
-        log.info("Current command: " + command.getClass().getSimpleName());
-        String page = null;
-        try {
-            page = command.execute(request);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (Objects.requireNonNull(page).contains("redirect")) {
-            response.sendRedirect(request.getContextPath() + request.getServletPath() + page.replace("redirect:", ""));
-        } else {
-            request.getRequestDispatcher(page).forward(request, response);
-        }
+        commandService.executeCommand(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

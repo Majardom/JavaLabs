@@ -42,7 +42,8 @@ public class AuthFilter implements Filter {
             "/add/addDish",
             "/add/removeDish",
             "/add/addedOrder",
-            "/logout");
+            "/logout",
+            "/hibernate");
     private final List<String> authorizedPaths = Arrays.asList(
             "/menu",
             "/addMoney",
@@ -55,7 +56,8 @@ public class AuthFilter implements Filter {
             "/order/removeD",
             "/order/addedOrder",
             "/balance",
-            "/logout");
+            "/logout",
+            "/hibernate");
     private final List<String> unauthorizedPaths = Arrays.asList(
             "/menu",
             "/login",

@@ -45,6 +45,11 @@
                             <fmt:message key="nav.odering">Odering</fmt:message>
                         </a>
                     </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/app/hibernate">
+                            Hibernate
+                        </a>
+                    </li>
                     <c:if test="${isAuthorize == 2}">
                         <li>
                             <a href="${pageContext.request.contextPath}/app/adminOrder">

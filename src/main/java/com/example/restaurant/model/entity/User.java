@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class User implements java.io.Serializable   {
+public class User {
 
     private Long id;
     private String firstName;

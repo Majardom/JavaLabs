@@ -95,11 +95,14 @@ public class DishAddCommand implements Command {
                 }
             }
         }
+
+        productList.add(productService.findByProductName("bread"));
+
         Dish newDish = new Dish();
-        newDish.setNameUkr(nameUkr);
-        newDish.setName(name);
-        newDish.setPrice(new BigInteger(price));
-        newDish.setFileName(src);
+        newDish.setNameUkr("TEST");
+        newDish.setName("TEST");
+        newDish.setPrice(new BigInteger("3500"));
+        newDish.setFileName("test/test");
         newDish.setProductsForDish(productList);
 
         log.info(String.format("Save new dish: %s", newDish));

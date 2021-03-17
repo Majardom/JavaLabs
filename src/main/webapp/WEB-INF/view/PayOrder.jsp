@@ -44,11 +44,6 @@
                         <fmt:message key="nav.odering">Odering</fmt:message>
                     </a>
                 </li>
-                <li>
-                    <a href="${pageContext.request.contextPath}/app/adminOrder">
-                        <fmt:message key="nav.admin">Admin</fmt:message>
-                    </a>
-                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item">
