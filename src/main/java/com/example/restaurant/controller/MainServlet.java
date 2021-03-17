@@ -1,6 +1,7 @@
 package com.example.restaurant.controller;
 
 import com.example.restaurant.controller.EJB.CommandService;
+import com.example.restaurant.controller.EJB.TestEntityService;
 import com.example.restaurant.controller.command.AdminCheckOrderCommand;
 import com.example.restaurant.controller.command.AdminCommand;
 import com.example.restaurant.controller.command.AdminConfirmCommand;
@@ -55,6 +56,9 @@ public class MainServlet extends HttpServlet {
     @EJB
     CommandService commandService;
 
+    @EJB
+    TestEntityService testEntityService;
+
     public void init(ServletConfig servletConfig) {
 
         commands.put("/logout", new LogoutCommand());
@@ -77,7 +81,7 @@ public class MainServlet extends HttpServlet {
         commands.put("/addMoney", new BalancePageCommand(userService));
         commands.put("/addBalance", new BalanceReplenishCommand(userService));
         commands.put("/adminOrder", new AdminCommand(orderService, productService));
-        commands.put("/hibernate", new HibernateTestCommand());
+        commands.put("/hibernate", new HibernateTestCommand(testEntityService));
 
         commandService.setCommands(commands);
     }

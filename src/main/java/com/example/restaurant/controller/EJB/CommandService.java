@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.ejb.Stateful;
-
+import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import java.util.Objects;
 import javax.servlet.ServletException;
 
-@Stateful
+@Stateless
 public class CommandService {
     private Map<String, Command> commands = new HashMap<>();
     private static final Logger log = LogManager.getLogger();

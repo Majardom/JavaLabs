@@ -89,7 +89,6 @@
     <h1><fmt:message key="menu.menu">menu</fmt:message></h1>
     <table class="table">
         <tr>
-            <th scope="col"><fmt:message key="dish.foto">Foto</fmt:message></th>
             <th scope="col"><fmt:message key="dish.dishName">name of Dish</fmt:message></th>
             <th scope="col"><fmt:message key="dish.price">price of dish</fmt:message></th>
             <th scope="col"><fmt:message key="dish.products">Products</fmt:message></th>
@@ -99,21 +98,11 @@
         </tr>
         <c:forEach var="dish" items="${requestScope.dishes}">
             <tr>
-                <td>
-                    <img alt="Picture" height="100"
-                         src="${pageContext.request.contextPath}/images/${dish.fileName}" width="100">
-                </td>
+                
                 <td>
                 <span>
-                    <c:set var="localeCode" value="${pageContext.response.locale}"/>
-                        <c:choose>
-                            <c:when test="${lang == 'uk'}">
-                                ${dish.nameUkr}
-                            </c:when>
-                            <c:otherwise>
-                                ${dish.name}
-                            </c:otherwise>
-                        </c:choose>
+                     ${dish.name}
+                    
                 </span>
                 </td>
                 <td>
@@ -121,7 +110,7 @@
                 </td>
                 <td>
                     <c:forEach var="product" items="${dish.productsForDish}">
-                        <fmt:message key="prod.${product.product}"></fmt:message>
+                        ${product.product}
                     </c:forEach>
                 </td>
                 <c:if test="${isAuthorize == 2 || isAuthorize == 1}">

@@ -5,6 +5,8 @@ import com.example.restaurant.utils.HibernateSessionFactoryUtil;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.resource.transaction.spi.TransactionStatus;
+
 import java.util.List;
 
 public class TestEntityDao {
@@ -14,26 +16,58 @@ public class TestEntityDao {
 
     public void save(TestEntity test) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx1 = session.beginTransaction();
-        session.save(test);
-        tx1.commit();
-        session.close();
+        try {
+            Transaction tx1 = session.beginTransaction();
+            session.save(test);
+            tx1.commit();
+        }
+        catch ( Exception e ) {
+            if ( session.getTransaction().getStatus() == TransactionStatus.ACTIVE
+                    || session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK ) {
+                session.getTransaction().rollback();
+            }
+        }
+        finally {
+            session.close();
+        }
     }
 
     public void update(TestEntity test) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx1 = session.beginTransaction();
-        session.update(test);
-        tx1.commit();
-        session.close();
+
+        try {
+            Transaction tx1 = session.beginTransaction();
+            session.update(test);
+            tx1.commit();
+        }
+        catch ( Exception e ) {
+            if ( session.getTransaction().getStatus() == TransactionStatus.ACTIVE
+                    || session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK ) {
+                session.getTransaction().rollback();
+            }
+        }
+        finally {
+            session.close();
+        }
     }
 
     public void delete(TestEntity test) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx1 = session.beginTransaction();
-        session.delete(test);
-        tx1.commit();
-        session.close();
+
+        try {
+            Transaction tx1 = session.beginTransaction();
+            session.delete(test);
+            tx1.commit();
+        }
+        catch ( Exception e ) {
+            if ( session.getTransaction().getStatus() == TransactionStatus.ACTIVE
+                    || session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK ) {
+                session.getTransaction().rollback();
+            }
+        }
+        finally {
+            session.close();
+        }
     }
 
     public List<TestEntity> findAll() {
